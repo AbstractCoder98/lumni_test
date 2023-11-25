@@ -32,7 +32,7 @@ const LoginManager = (props: ILoginManagerProps) => {
     } else if (!response.isSuccess) {
       props.onError && props.onError();
     } else {
-      storeSessionState({ isLogin: true, ...response.body });
+      storeSessionState({ isLogin: true, loginTimeout: null, ...response.body });
       props.onLoginSuccess && props.onLoginSuccess();
     }
   }

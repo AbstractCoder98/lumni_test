@@ -4,6 +4,7 @@ import appStateConfig from "./appStateConfig";
 
 const defaultSessionState: IAppSessionState = {
   isLogin: false,
+  loginTimeout: null,
   userId: null,
   personId: null,
   expiration: null,
