@@ -2,12 +2,15 @@ import { FormEvent, useState } from "react";
 import styles from "./LoginManager.module.css";
 import { loginWithEmailAndPassword } from "../Api/LoginApi";
 import useAppState from "../AppState/useAppState";
+import ButtonWithLoading from "../ButtonWithLoading";
+import Input from "../Fields/Input";
 
 
 export interface ILoginManagerProps {
   onLoginSuccess?: () => void;
   onLoginFail?: () => void;
   onError?: () => void;
+  isLocked: boolean;
 }
 
 const LoginManager = (props: ILoginManagerProps) => {
@@ -38,17 +41,32 @@ const LoginManager = (props: ILoginManagerProps) => {
   }
 
   const onSubmit = (evt: FormEvent) => {
-    // TODO: implement
     evt.preventDefault();
-    callLoginApi("admin.user@lumni.net", "12345678");
+    callLoginApi(inputEmail!, inputPassword!);
   };
 
   return (
     <section className={styles.root}>
       <h1>Inicia sesión</h1>
-      <form onSubmit={onSubmit}>
-        {/* TODO: Implement inputs */}
-        <button type="submit">Login</button>
+      <form className={styles.form} onSubmit={onSubmit}>
+        <p>Inicia sesión con tu usuario y contraseña</p>
+        <label>Correo electrónico</label>
+        <Input required={true} variant="filled" type="email" disabled={props.isLocked} onChange={e => { setInputEmail(e.target.value) }} />
+        <label>Contraseña</label>
+        <Input required variant="filled" type="password" disabled={props.isLocked} onChange={e => { setInputPassword(e.target.value) }} />
+        {props.isLocked && (
+            <p className={styles.validation_error}>Login deshabilitado... intente mas tarde</p>
+          )
+        }
+        <ButtonWithLoading
+          variant="contained"
+          disabled={props.isLocked}
+          color="primary"
+          type="submit"
+          loading={loading === true}
+        >
+          Iniciar Sesión
+        </ButtonWithLoading>
       </form>
     </section>
   )
