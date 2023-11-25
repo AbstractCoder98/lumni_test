@@ -14,3 +14,25 @@
   margin: 0;
   text-align: center;
 }
+
+.form {
+  display: flex;
+  flex-flow: column;
+  gap: 0.5rem;
+}
+.form p {
+  text-align: center;
+}
+.form label {
+  font-weight: bold;
+}
+.form input {
+  background-color: var(--login-input-filled-background-color);
+}
+.form button {
+  margin-top: 1rem;
+  align-self: center;
+}
+.validation_error {
+  color: var(--color-error);
+}

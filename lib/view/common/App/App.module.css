@@ -46,6 +46,7 @@
   --input-filled-background-color-rgb: 239, 239, 239;
   --input-filled-error-background-color: #fae9e9;
   --input-filled-color: currentColor;
+  --login-input-filled-background-color: #e8f0fe;
   /* --input-filled-box-shadow: 0 0.05em 0.08em rgba(0, 0, 0, 0.1); */
   --input-filled-box-shadow: none;
   --input-filled-focus-color: var(--color-primary);
