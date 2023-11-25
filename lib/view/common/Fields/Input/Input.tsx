@@ -6,13 +6,14 @@ export interface IInputProps {
   color?: "light" | "dark";
   multiline?: boolean;
   id?: string;
-  type?: "text" | "number" | "password" | "date" | "file";
+  type?: "text" | "email" | "number" | "password" | "date" | "file";
   name?: string;
   value?: string | number;
   disabled?: boolean;
   placeholder?: string;
   error?: boolean;
   style?: CSSProperties;
+  required?: boolean;
   min?: string | number;
   max?: string | number;
   maxLength?: number;
@@ -53,6 +54,7 @@ const Input = forwardRef(function Input(
       accept={props.accept}
       min={props.min}
       max={props.max}
+      required={props.required}
       autoFocus={props.autofocus}
       hidden={props.hidden}
     />
