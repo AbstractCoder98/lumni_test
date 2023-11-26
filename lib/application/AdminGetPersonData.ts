@@ -29,11 +29,19 @@ export default class AdminGetPersonData {
     return this.personDtoMapper.entityToDto(entity);
   }
 
-  
+
   async getPersonsByEmploymentInfoKeyWords(searchString: string, authInfo?: IAuthorizationDataDto): Promise<IPersonDto[] | null> {
 
-    // TODO:  Implement
+    if (authInfo === undefined || !authInfo.roles.includes(UserRole.Staff)) {
+      throw new UnauthorizedException("Allowed for Staff Only");
+    }
 
-    return []
+    if (searchString) {
+      const entities = await this.personsRepository.fetchByEmploymentInfoKeyWords(searchString);
+      return entities != null ? entities.map(x => this.personDtoMapper.entityToDto(x)) : null;
+    }
+
+    const entities = await this.personsRepository.fetchAllWithEmploymentInfo();
+    return entities.map(x => this.personDtoMapper.entityToDto(x));
   }
 }
